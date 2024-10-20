@@ -1,5 +1,5 @@
 const std = @import("std");
-const http = @import("./http.zig");
+const http = @import("http");
 
 fn loadRessource(alloc: std.mem.Allocator, dir: []const u8, path: []const u8) !void {
     const ressource_path = try std.fmt.allocPrint(alloc, comptime "{s}{s}", .{ dir, path });
@@ -20,7 +20,7 @@ pub fn main() !void {
     const request_str =
         \\GET /index.html
     ;
-    const request = try http.parseRequestStr(allocator, request_str);
+    const request = try http.request.parseRequestStr(allocator, request_str);
     defer request.deinit();
 
     try loadRessource(allocator, ressource_directory, request.path);
