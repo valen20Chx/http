@@ -20,7 +20,7 @@ pub fn main() !void {
     const request_str =
         \\GET /index.html
     ;
-    const request = try http.request.parseRequestStr(allocator, request_str);
+    const request = try http.Request.fromString(allocator, request_str);
     defer request.deinit();
 
     try loadRessource(allocator, ressource_directory, request.path);
